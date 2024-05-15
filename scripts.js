@@ -12,7 +12,13 @@ class Calculator {
     }
 
     delete(){
-        this.currentOperand = this.currentOperand.toString().slice(0,-1) //slice from start to second to last    
+        if (this.currentOperand.toString() === ""){
+            return
+        } else if (this.currentOperand.toString().length == 1) {
+            this.currentOperand = ""
+        } else {
+            this.currentOperand = this.currentOperand.toString().slice(0,-1) //slice from start to second to last    
+        }  
     }
 
     appendNumber(number){
@@ -22,6 +28,10 @@ class Calculator {
 
     chooseOperation(operation){
         if(this.currentOperand === '') return // Case where there is no digits
+        if (this.operation !== undefined){
+            this.operation == operation
+            this.updateDisplay()
+        }
         if(this.previousOperand !== '') { 
             this.compute()
         }
@@ -58,29 +68,10 @@ class Calculator {
         this.previousOperand = ''
     }
 
-    getDisplayNumber(number){
-        const stringNumber = number.toString()
-        const integerDigits = parseFloat(stringNumber.split(".")[0])
-        const decimalDigits = stringNumber.split('.')[1]
-        let integerDisplay
-
-        if (isNaN(integerDigits)){
-            integerDigits = ''
-        } else {
-            integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0})
-        }
-        if (decimalDigits != null) {
-            return `${integerDisplay}.${decimalDigits}`
-        } else {
-            return integerDisplay
-        }
-    }
-
     updateDisplay(){
-        this.currentOperandElement.innerText = this.getDisplayNumber(this.currentOperand)
+        this.currentOperandElement.innerText = this.currentOperand
         if (this.operation != null) { 
-            this.previousOperandElement.innerText =
-                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+            this.previousOperandElement.innerText = `${this.previousOperand} ${this.operation}`
         } else {
             this.previousOperandElement.innerText = ''
         }
@@ -129,5 +120,4 @@ deleteButton.addEventListener('click', () => {
     calculator.updateDisplay()
 })
 
-// TODO: Fix functionality with negative numbers
 // TODO: Fix Display to properly display current status
