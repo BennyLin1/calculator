@@ -1,7 +1,8 @@
 # Calculator 
 
-Inspired by the Odin Project 
-
+Inspired by The Odin Project 
 Assignment : Calculator
 
-Project includes the use of JavaScript, HTML, CSS and implements basci OOP concepts.
+This project includes a simple calculator created using JavaScript, HTML, CSS and basic Object Oriented Programming concepts. 
+
+Live Site: https://bennylin1.github.io/calculator/
